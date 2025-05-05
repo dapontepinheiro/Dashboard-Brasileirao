@@ -1,4 +1,4 @@
-import requests, pandas as pd
+import os, requests, pandas as pd
 from arquivo_token import FOOTBALL_TOKEN
 
 base_url = 'http://api.football-data.org/v4/'
@@ -35,7 +35,6 @@ nomes_alterados = {
 def preenchendo_tabela():
     endpoint = 'competitions/BSA/standings'
     dados = obter_dados(endpoint)
-    print(dados)
     for time in dados['standings'][0]['table']:
 
         tabela["Posição"].append(time['position'])
@@ -48,8 +47,8 @@ def preenchendo_tabela():
         tabela['Saldo de Gols'].append(time['goalDifference'])
     
     df = pd.DataFrame.from_dict(tabela)
-    df.to_excel("TabelaBrasileirao.xlsx", index=False)
-    print(df)
+    caminho_arquivo = os.path.join('dados', 'TabelaBrasileirao.xlsx')
+    df.to_excel(caminho_arquivo, index=False)
 
 
 estatisticas_jogadores = {
@@ -70,28 +69,27 @@ def preenchendo_estatisticas():
         estatisticas_jogadores['Gols'].append(jogador['goals'])
         estatisticas_jogadores['Assistências'].append(jogador['assists'])
 
-    print(estatisticas_jogadores)
     df = pd.DataFrame.from_dict(estatisticas_jogadores)
-    df.to_excel("EstatisticasDosJogadores.xlsx", index=False)
-    print(df)
+    caminho_arquivo = os.path.join('dados', 'EstatisticasDosJogadores.xlsx')
+    df.to_excel(caminho_arquivo, index=False)
 
 
-escudos = {
-    'Time': [],
-    'Escudo': []
-}
-def preenchendo_escudos():
-    endpoint = 'competitions/BSA/teams'
-    dados = obter_dados(endpoint)
+# escudos = {
+#     'Time': [],
+#     'Escudo': []
+# }
+# def preenchendo_escudos():
+#     endpoint = 'competitions/BSA/teams'
+#     dados = obter_dados(endpoint)
 
-    for time in dados['teams']:
-        escudos['Time'].append(time['shortName'])
-        escudos['Escudo'].append(time['crest'])
+#     for time in dados['teams']:
+#         escudos['Time'].append(time['shortName'])
+#         escudos['Escudo'].append(time['crest'])
 
-    print(escudos)
-    df = pd.DataFrame.from_dict(escudos)
-    df.to_excel("EscudosDosTimes.xlsx", index=False)
-    print(df)
+#     print(escudos)
+#     df = pd.DataFrame.from_dict(escudos)
+#     df.to_excel("EscudosDosTimes.xlsx", index=False)
+#     print(df)
 
 
 rodadas_geral = {
@@ -132,9 +130,8 @@ def preenchendo_rodadas():
         i += 1
     
     df = pd.DataFrame.from_dict(rodadas_geral)
-    df.to_excel("Rodadas.xlsx", index=False)
-    print(rodadas_geral)
-    print(df)
+    caminho_arquivo = os.path.join('dados', 'Rodadas.xlsx')
+    df.to_excel(caminho_arquivo, index=False)
 
 
 elenco = {
@@ -154,19 +151,8 @@ def preenchendo_elenco():
             elenco['Posição'].append(time[i]['squad'][j]['position'])
 
     df = pd.DataFrame.from_dict(elenco)
-    df.to_excel("Jogadores.xlsx", index=False)
-    print(elenco)
-    print(df)
-        
-
-infos = {
-    'Time': [],
-    'Estado': [],
-    'Estádio': [],
-    'Treinador': []
-}
-def preenchendo_informacoes():
-    ...
+    caminho_arquivo = os.path.join('dados', 'Jogadores.xlsx')
+    df.to_excel(caminho_arquivo, index=False)
 
 
 preenchendo_tabela()
