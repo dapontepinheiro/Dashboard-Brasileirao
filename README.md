@@ -31,7 +31,7 @@ API-Football-Data → Python (pandas) → Excel → Power BI
 
 ## ▶️ Como executar
 ```bash
-pip install requests pandas openpyxl
+pip install -r requirements.txt
 python criando_planilhas.py
 ```
 Abra o arquivo `DashboardBrasileirao.pbix` no Power BI Desktop.
