@@ -154,9 +154,12 @@ def preenchendo_elenco():
     caminho_arquivo = os.path.join('dados', 'Jogadores.xlsx')
     df.to_excel(caminho_arquivo, index=False)
 
-
+print('preenchendo tabela...')
 preenchendo_tabela()
+print('preenchendo rodadas...')
 preenchendo_rodadas()
+print('preenchendo estatísticas...')
 preenchendo_estatisticas()
+print('preenchendo elenco...')
 preenchendo_elenco()
 
